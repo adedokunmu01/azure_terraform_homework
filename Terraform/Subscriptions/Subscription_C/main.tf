@@ -6,6 +6,7 @@ locals {
 provider "azurerm" {
   features {}
   subscription_id = "f06a0be6-fe70-4fca-a3aa-9c0bc23f66cf"
+  alias           = "sub3"
 }
 
 resource "azurerm_resource_group" "example" {
