@@ -122,3 +122,6 @@ output "vnet_name" {
   values = azurerm_virtual_network.example.name
 }
 
+output "last_priority" {
+  values = azurerm_network_security_rule.example5.priority
+}
