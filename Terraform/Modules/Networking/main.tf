@@ -4,7 +4,7 @@ data "azurerm_resource_group" "example" {
 data "azurerm_virtual_network" "example" {
   name = "Subscription_A"
 }
-data "azurerm_network_security_group" "example" {
+data "azurerm_network_security_rule" "example5" {
   name = "example-resources"
 }
 resource "azurerm_virtual_network" "example" {
@@ -34,7 +34,7 @@ resource "azurerm_subnet_network_security_group_association" "example" {
 
 resource "azurerm_network_security_rule" "example" {
   name                        = "test123"
-  priority                    = module.last_priority.priority + 10
+  priority                    = data.azurerm_network_security_rule.example5.priority + 2
   direction                   = "Outbound"
   access                      = "Allow"
   protocol                    = "Tcp"
