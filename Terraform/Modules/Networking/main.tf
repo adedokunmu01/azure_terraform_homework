@@ -1,3 +1,8 @@
+module "subscription_a" {
+  source = "../../Subscription/SubscriptionA"
+}
+  
+
 resource "azurerm_virtual_network" "example" {
   name                = var.sub_name
   location            = var.resource_group.location
