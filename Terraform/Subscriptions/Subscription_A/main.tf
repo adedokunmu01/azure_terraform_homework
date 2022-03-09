@@ -81,6 +81,35 @@ resource "azurerm_network_security_rule" "example3" {
   network_security_group_name = azurerm_network_security_group.example.name
 }
 
+
+resource "azurerm_network_security_rule" "example4" {
+  name                        = "test1234"
+  priority                    = 106
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "10.0.2.0/24"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.example.name
+  network_security_group_name = azurerm_network_security_group.example.name
+}
+
+resource "azurerm_network_security_rule" "example5" {
+  name                        = "test12345"
+  priority                    = 108
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "10.0.3.0/24"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.example.name
+  network_security_group_name = azurerm_network_security_group.example.name
+}
+
 output "vnet_id" {
   values = azurerm_virtual_network.example.id
 }
