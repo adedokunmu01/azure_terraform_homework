@@ -1,15 +1,11 @@
-module "subscription_a" {
-  source = "../../Subscriptions/Subscription_A"
+data "azurerm_resource_group" "example" {
+  name = "Subscription_A"
 }
-
-data "azurerm_resources" "example" {
-  resource_group_name = "example-resources"
+data "azurerm_virtual_network" "example" {
+  name = "Subscription_A"
 }
-data "azurerm_resources" "example" {
-  resource_group_name = "example-resources"
-}
-data "azurerm_resources" "example" {
-  resource_group_name = "example-resources"
+data "azurerm_network_security_group" "example" {
+  name = "example-resources"
 }
 resource "azurerm_virtual_network" "example" {
   name                = var.sub_name
@@ -52,8 +48,8 @@ resource "azurerm_network_security_rule" "example" {
   
 resource "azurerm_virtual_network_peering" "vnet-peer-1" {
 name = "vnet1-vnet2"
-resource_group_name           = [module.subscription_A.rg_name]
-virtual_network_name          = [module.subscription_A.vnet_name]
+resource_group_name           = data.azurerm_resource_group.example.rg_name
+virtual_network_name          = data.azurerm_virtual_network.example.vnet_name
 remote_virtual_network_id     = azurerm_virtual_network.example.id
 allow_virtual_network_access  = "true"
 allow_forwarded_traffic       = "true"
@@ -63,7 +59,7 @@ resource "azurerm_virtual_network_peering" "vnet-peer-2" {
 name                         = "vnet2-vnet1"
 resource_group_name          = var.resource_group.name
 virtual_network_name         = azurerm_virtual_network.example.name
-remote_virtual_network_id    = [module.subscription_A.vnet_id]
+remote_virtual_network_id    = data.azurerm_virtual_network.example.vnet_id
 allow_virtual_network_access = "true"
 allow_forwarded_traffic      = "true"
 }
