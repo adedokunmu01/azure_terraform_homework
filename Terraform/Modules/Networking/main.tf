@@ -1,8 +1,16 @@
 module "subscription_a" {
   source = "../../Subscriptions/Subscription_A"
 }
-  
 
+data "azurerm_resources" "example" {
+  resource_group_name = "example-resources"
+}
+data "azurerm_resources" "example" {
+  resource_group_name = "example-resources"
+}
+data "azurerm_resources" "example" {
+  resource_group_name = "example-resources"
+}
 resource "azurerm_virtual_network" "example" {
   name                = var.sub_name
   location            = var.resource_group.location
@@ -30,7 +38,7 @@ resource "azurerm_subnet_network_security_group_association" "example" {
 
 resource "azurerm_network_security_rule" "example" {
   name                        = "test123"
-  priority                    = 100
+  priority                    = module.last_priority.priority + 10
   direction                   = "Outbound"
   access                      = "Allow"
   protocol                    = "Tcp"
@@ -41,7 +49,7 @@ resource "azurerm_network_security_rule" "example" {
   resource_group_name         = "subscription_1"
   network_security_group_name = "Sub_1_NSG"
 }
-
+  
 resource "azurerm_virtual_network_peering" "vnet-peer-1" {
 name = "vnet1-vnet2"
 resource_group_name           = [module.subscription_A.rg_name]
