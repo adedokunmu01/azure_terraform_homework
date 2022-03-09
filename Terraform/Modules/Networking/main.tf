@@ -5,7 +5,7 @@ data "azurerm_virtual_network" "example" {
   name = "Subscription_A"
 }
 data "azurerm_network_security_rule" "example5" {
-  name = "example-resources"
+  name = "test12345"
 }
 resource "azurerm_virtual_network" "example" {
   name                = var.sub_name
