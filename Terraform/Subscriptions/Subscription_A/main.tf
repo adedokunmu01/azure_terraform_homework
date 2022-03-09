@@ -80,3 +80,16 @@ resource "azurerm_network_security_rule" "example3" {
   resource_group_name         = azurerm_resource_group.example.name
   network_security_group_name = azurerm_network_security_group.example.name
 }
+
+output "vnet_id" {
+  values = azurerm_virtual_network.example.id
+}
+
+output "rg_name" {
+  values = azurerm_resource_group.example.name
+}
+
+output "vnet_id" {
+  values = azurerm_virtual_network.example.name
+}
+
