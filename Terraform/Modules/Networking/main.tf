@@ -36,3 +36,21 @@ resource "azurerm_network_security_rule" "example" {
   resource_group_name         = "subscription_1"
   network_security_group_name = "Sub_1_NSG"
 }
+
+resource "azurerm_virtual_network_peering" "vnet-peer-1" {
+name = "vnet1-vnet2"
+resource_group_name = "${data.azurerm_resource_group.rg1.name}"
+virtual_network_name = "${data.azurerm_virtual_network.vnet1.name}"
+remote_virtual_network_id = "${data.azurerm_virtual_network.vnet2.id}"
+allow_virtual_network_access = "true"
+allow_forwarded_traffic = "true"
+}
+
+resource "azurerm_virtual_network_peering" "vnet-peer-2" {
+name                         = "vnet2-vnet1"
+resource_group_name          = var.resource_group.name
+virtual_network_name         = azurerm_virtual_network.example.name
+remote_virtual_network_id    = azurerm_virtual_network.vnet1.id
+allow_virtual_network_access = "true"
+allow_forwarded_traffic      = "true"
+}
