@@ -89,7 +89,7 @@ output "rg_name" {
   values = azurerm_resource_group.example.name
 }
 
-output "vnet_id" {
+output "vnet_name" {
   values = azurerm_virtual_network.example.name
 }
 
